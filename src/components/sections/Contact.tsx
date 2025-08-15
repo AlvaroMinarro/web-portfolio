@@ -85,7 +85,7 @@ const Contact = () => {
                     whileTap={{ scale: 0.98 }}
                   >
                     <div className={`w-12 h-12 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center mr-4 group-hover:bg-primary-100 dark:group-hover:bg-primary-900/30 transition-colors`}>
-                      {link.icon.startsWith('/') ? (
+                      {link.icon.startsWith('/') || link.icon.startsWith(import.meta.env.BASE_URL) ? (
                         <img 
                           src={link.icon} 
                           alt={link.name} 

@@ -1,24 +1,26 @@
 import type { Technology, Experience, ContactLink } from '@/types';
 
+const BASE_URL = import.meta.env.BASE_URL;
+
 export const technologies: Technology[] = [
   // Mobile Development - Nivel 3 (Expert)
   {
     name: 'Android',
-    icon: '/android.svg',
+    icon: `${BASE_URL}android.svg`,
     color: 'text-green-500',
     category: 'mobile',
     level: 3,
   },
   {
     name: 'Kotlin',
-    icon: '/kotlin.svg',
+    icon: `${BASE_URL}kotlin.svg`,
     color: 'text-purple-500',
     category: 'mobile',
     level: 3,
   },
   {
     name: 'Jetpack Compose',
-    icon: '/jetpackcompose.svg',
+    icon: `${BASE_URL}jetpackcompose.svg`,
     color: 'text-blue-500',
     category: 'mobile',
     level: 3,
@@ -27,7 +29,7 @@ export const technologies: Technology[] = [
   // Kotlin Multiplatform - Nivel 1 (Estudiando)
   {
     name: 'KMP',
-    icon: '/kotlin.svg',
+    icon: `${BASE_URL}kotlin.svg`,
     color: 'text-purple-400',
     category: 'mobile',
     level: 1,
@@ -36,42 +38,42 @@ export const technologies: Technology[] = [
   // Frontend - Nivel 2 (Avanzado)
   {
     name: 'JavaScript',
-    icon: '/js.svg',
+    icon: `${BASE_URL}js.svg`,
     color: 'text-yellow-500',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'TypeScript',
-    icon: '/ts.svg',
+    icon: `${BASE_URL}ts.svg`,
     color: 'text-blue-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'React',
-    icon: '/react.svg',
+    icon: `${BASE_URL}react.svg`,
     color: 'text-cyan-500',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'Angular',
-    icon: '/angular.svg',
+    icon: `${BASE_URL}angular.svg`,
     color: 'text-red-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'HTML',
-    icon: '/html.svg',
+    icon: `${BASE_URL}html.svg`,
     color: 'text-orange-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'CSS',
-    icon: '/css.svg',
+    icon: `${BASE_URL}css.svg`,
     color: 'text-blue-500',
     category: 'frontend',
     level: 2,
@@ -80,7 +82,7 @@ export const technologies: Technology[] = [
   // Backend - Nivel 2 (Avanzado)
   {
     name: 'Node.js',
-    icon: '/nodejs.svg',
+    icon: `${BASE_URL}nodejs.svg`,
     color: 'text-green-600',
     category: 'backend',
     level: 2,
@@ -89,14 +91,14 @@ export const technologies: Technology[] = [
   // Database & Cloud
   {
     name: 'Firebase',
-    icon: '/firebase.svg',
+    icon: `${BASE_URL}firebase.svg`,
     color: 'text-orange-500',
     category: 'database',
     level: 2,
   },
   {
     name: 'AWS',
-    icon: '/aws.svg',
+    icon: `${BASE_URL}aws.svg`,
     color: 'text-orange-400',
     category: 'tools',
     level: 2,
@@ -113,21 +115,21 @@ export const technologies: Technology[] = [
   },
   {
     name: 'GitHub',
-    icon: '/github.svg',
+    icon: `${BASE_URL}github.svg`,
     color: 'text-gray-800 dark:text-white',
     category: 'tools',
     level: 3,
   },
   {
     name: 'GitLab',
-    icon: '/gitlab.svg',
+    icon: `${BASE_URL}gitlab.svg`,
     color: 'text-orange-500',
     category: 'tools',
     level: 3,
   },
   {
     name: 'Asana',
-    icon: '/asana.svg',
+    icon: `${BASE_URL}asana.svg`,
     color: 'text-pink-500',
     category: 'tools',
     level: 2,
@@ -159,7 +161,7 @@ export const experiences: Experience[] = [
       'Gestión de notificaciones Firebase con topics',
       'Sistema de autenticación JWT'
     ],
-    projectImage: '/navilens.jpg'
+    projectImage: `${BASE_URL}navilens.jpg`
   },
   {
     id: '2',
@@ -177,7 +179,7 @@ export const experiences: Experience[] = [
       'Integración con APIs de League of Legends',
       'Gestión de estado con arquitectura MVVM'
     ],
-    projectImage: '/lolesportstracker.png'
+    projectImage: `${BASE_URL}lolesportstracker.png`
   }
 ];
 
@@ -191,13 +193,13 @@ export const contactLinks: ContactLink[] = [
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/alvaro-minarro-gil/',
-    icon: '/linkedin.svg',
+    icon: `${BASE_URL}linkedin.svg`,
     color: 'text-blue-600',
   },
   {
     name: 'GitHub',
     url: 'https://github.com/AlvaroMinarro',
-    icon: '/github.svg',
+    icon: `${BASE_URL}github.svg`,
     color: 'text-gray-900 dark:text-white',
   },
 ];

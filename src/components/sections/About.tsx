@@ -2,7 +2,8 @@ import { motion } from 'framer-motion';
 import { Download, User, Code2, Sparkles } from 'lucide-react';
 import { useLanguage } from '@hooks/index';
 import { Button, Section } from '@components/ui';
-const perfilImage = '/perfil.jpg';
+const BASE_URL = import.meta.env.BASE_URL;
+const perfilImage = `${BASE_URL}perfil.jpg`;
 
 const About = () => {
   const { t } = useLanguage();

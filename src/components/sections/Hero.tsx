@@ -3,7 +3,8 @@ import { ChevronDown, ArrowRight, Download } from 'lucide-react';
 import { useLanguage, useActiveSection } from '@hooks/index';
 import { Button, Section } from '@components/ui';
 
-const perfilImage = '/perfil.jpg';
+const BASE_URL = import.meta.env.BASE_URL;
+const perfilImage = `${BASE_URL}perfil.jpg`;
 
 const Hero = () => {
   const { t } = useLanguage();
@@ -106,7 +107,7 @@ const Hero = () => {
                     rotate: { duration: 8, repeat: Infinity, ease: 'linear' },
                   }}
                 >
-                  <img src="/android.svg" alt="Android" className="w-8 h-8" />
+                  <img src={`${BASE_URL}android.svg`} alt="Android" className="w-8 h-8" />
                 </motion.div>
                 
                 <motion.div
@@ -120,7 +121,7 @@ const Hero = () => {
                     rotate: { duration: 6, repeat: Infinity, ease: 'linear' },
                   }}
                 >
-                  <img src="/kotlin.svg" alt="Kotlin" className="w-7 h-7" />
+                  <img src={`${BASE_URL}kotlin.svg`} alt="Kotlin" className="w-7 h-7" />
                 </motion.div>
                 
                 <motion.div
@@ -135,7 +136,7 @@ const Hero = () => {
                     ease: 'easeInOut',
                   }}
                 >
-                  <img src="/jetpackcompose.svg" alt="Jetpack Compose" className="w-6 h-6" />
+                  <img src={`${BASE_URL}jetpackcompose.svg`} alt="Jetpack Compose" className="w-6 h-6" />
                 </motion.div>
               </motion.div>
             </div>
