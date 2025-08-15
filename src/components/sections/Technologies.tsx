@@ -74,7 +74,7 @@ const Technologies = () => {
 
   // Función para renderizar icono
   const renderIcon = (tech: Technology) => {
-    if (tech.icon.startsWith('/') || tech.icon.startsWith(import.meta.env.BASE_URL)) {
+    if (typeof tech.icon === 'string' && (tech.icon.startsWith('/') || tech.icon.startsWith('data:') || tech.icon.includes('.'))) {
       // Para ciertos SVGs que necesitan coloreado específico
       const needsColorOverride = ['ts.svg', 'typescript.svg'];
       const needsColor = needsColorOverride.some(name => tech.icon.includes(name));
