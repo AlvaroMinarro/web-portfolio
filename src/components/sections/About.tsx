@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Download, User, Code2, Sparkles } from 'lucide-react';
 import { useLanguage } from '@hooks/index';
 import { Button, Section } from '@components/ui';
-import perfilImage from '/perfil.jpg';
+import perfilImage from '/perfil.jpg?url';
 
 const About = () => {
   const { t } = useLanguage();

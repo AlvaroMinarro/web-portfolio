@@ -2,10 +2,10 @@ import { motion } from 'framer-motion';
 import { ChevronDown, ArrowRight, Download } from 'lucide-react';
 import { useLanguage, useActiveSection } from '@hooks/index';
 import { Button, Section } from '@components/ui';
-import perfilImage from '/perfil.jpg';
-import androidIcon from '/android.svg';
-import kotlinIcon from '/kotlin.svg';
-import jetpackComposeIcon from '/jetpackcompose.svg';
+import perfilImage from '/perfil.jpg?url';
+import androidIcon from '/android.svg?url';
+import kotlinIcon from '/kotlin.svg?url';
+import jetpackComposeIcon from '/jetpackcompose.svg?url';
 
 const Hero = () => {
   const { t } = useLanguage();
