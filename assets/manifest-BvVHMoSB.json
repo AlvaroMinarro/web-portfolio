@@ -1,0 +1,26 @@
+{
+  "name": "Álvaro - Portfolio",
+  "short_name": "Álvaro Dev",
+  "description": "Portfolio de Álvaro, desarrollador especializado en Android y Full Stack",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "android"],
+  "lang": "es",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' fill='%2310b981'/><text x='96' y='140' font-size='120' text-anchor='middle' fill='white'>Á</text></svg>",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><rect width='512' height='512' fill='%2310b981'/><text x='256' y='370' font-size='320' text-anchor='middle' fill='white'>Á</text></svg>",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
