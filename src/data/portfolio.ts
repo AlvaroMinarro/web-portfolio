@@ -1,44 +1,26 @@
 import type { Technology, Experience, ContactLink } from '@/types';
 
-// Import all images
-import androidIcon from '/android.svg';
-import kotlinIcon from '/kotlin.svg';
-import jetpackComposeIcon from '/jetpackcompose.svg';
-import jsIcon from '/js.svg';
-import tsIcon from '/ts.svg';
-import reactIcon from '/react.svg';
-import angularIcon from '/angular.svg';
-import htmlIcon from '/html.svg';
-import cssIcon from '/css.svg';
-import nodejsIcon from '/nodejs.svg';
-import firebaseIcon from '/firebase.svg';
-import awsIcon from '/aws.svg';
-import githubIcon from '/github.svg';
-import gitlabIcon from '/gitlab.svg';
-import asanaIcon from '/asana.svg';
-import linkedinIcon from '/linkedin.svg';
-import navilensImage from '/navilens.jpg';
-import lolesportstrackerImage from '/lolesportstracker.png';
+const BASE_URL = import.meta.env.BASE_URL;
 
 export const technologies: Technology[] = [
   // Mobile Development - Nivel 3 (Expert)
   {
     name: 'Android',
-    icon: androidIcon,
+    icon: `${BASE_URL}android.svg`,
     color: 'text-green-500',
     category: 'mobile',
     level: 3,
   },
   {
     name: 'Kotlin',
-    icon: kotlinIcon,
+    icon: `${BASE_URL}kotlin.svg`,
     color: 'text-purple-500',
     category: 'mobile',
     level: 3,
   },
   {
     name: 'Jetpack Compose',
-    icon: jetpackComposeIcon,
+    icon: `${BASE_URL}jetpackcompose.svg`,
     color: 'text-blue-500',
     category: 'mobile',
     level: 3,
@@ -47,7 +29,7 @@ export const technologies: Technology[] = [
   // Kotlin Multiplatform - Nivel 1 (Estudiando)
   {
     name: 'KMP',
-    icon: kotlinIcon,
+    icon: `${BASE_URL}kotlin.svg`,
     color: 'text-purple-400',
     category: 'mobile',
     level: 1,
@@ -56,42 +38,42 @@ export const technologies: Technology[] = [
   // Frontend - Nivel 2 (Avanzado)
   {
     name: 'JavaScript',
-    icon: jsIcon,
+    icon: `${BASE_URL}js.svg`,
     color: 'text-yellow-500',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'TypeScript',
-    icon: tsIcon,
+    icon: `${BASE_URL}ts.svg`,
     color: 'text-blue-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'React',
-    icon: reactIcon,
+    icon: `${BASE_URL}react.svg`,
     color: 'text-cyan-500',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'Angular',
-    icon: angularIcon,
+    icon: `${BASE_URL}angular.svg`,
     color: 'text-red-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'HTML',
-    icon: htmlIcon,
+    icon: `${BASE_URL}html.svg`,
     color: 'text-orange-600',
     category: 'frontend',
     level: 2,
   },
   {
     name: 'CSS',
-    icon: cssIcon,
+    icon: `${BASE_URL}css.svg`,
     color: 'text-blue-500',
     category: 'frontend',
     level: 2,
@@ -100,7 +82,7 @@ export const technologies: Technology[] = [
   // Backend - Nivel 2 (Avanzado)
   {
     name: 'Node.js',
-    icon: nodejsIcon,
+    icon: `${BASE_URL}nodejs.svg`,
     color: 'text-green-600',
     category: 'backend',
     level: 2,
@@ -109,14 +91,14 @@ export const technologies: Technology[] = [
   // Database & Cloud
   {
     name: 'Firebase',
-    icon: firebaseIcon,
+    icon: `${BASE_URL}firebase.svg`,
     color: 'text-orange-500',
     category: 'database',
     level: 2,
   },
   {
     name: 'AWS',
-    icon: awsIcon,
+    icon: `${BASE_URL}aws.svg`,
     color: 'text-orange-400',
     category: 'tools',
     level: 2,
@@ -133,21 +115,21 @@ export const technologies: Technology[] = [
   },
   {
     name: 'GitHub',
-    icon: githubIcon,
+    icon: `${BASE_URL}github.svg`,
     color: 'text-gray-800 dark:text-white',
     category: 'tools',
     level: 3,
   },
   {
     name: 'GitLab',
-    icon: gitlabIcon,
+    icon: `${BASE_URL}gitlab.svg`,
     color: 'text-orange-500',
     category: 'tools',
     level: 3,
   },
   {
     name: 'Asana',
-    icon: asanaIcon,
+    icon: `${BASE_URL}asana.svg`,
     color: 'text-pink-500',
     category: 'tools',
     level: 2,
@@ -179,7 +161,7 @@ export const experiences: Experience[] = [
       'Gestión de notificaciones Firebase con topics',
       'Sistema de autenticación JWT'
     ],
-    projectImage: navilensImage
+    projectImage: `${BASE_URL}navilens.jpg`
   },
   {
     id: '2',
@@ -197,7 +179,7 @@ export const experiences: Experience[] = [
       'Integración con APIs de League of Legends',
       'Gestión de estado con arquitectura MVVM'
     ],
-    projectImage: lolesportstrackerImage
+    projectImage: `${BASE_URL}lolesportstracker.png`
   }
 ];
 
@@ -211,13 +193,13 @@ export const contactLinks: ContactLink[] = [
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/alvaro-minarro-gil/',
-    icon: linkedinIcon,
+    icon: `${BASE_URL}linkedin.svg`,
     color: 'text-blue-600',
   },
   {
     name: 'GitHub',
     url: 'https://github.com/AlvaroMinarro',
-    icon: githubIcon,
+    icon: `${BASE_URL}github.svg`,
     color: 'text-gray-900 dark:text-white',
   },
 ];
