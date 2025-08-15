@@ -5,7 +5,7 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  // base: '/web-portfolio/', // Se configurará para production cuando sea necesario
+  base: 'https://alvarominarro.github.io/web-portfolio/',
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),
