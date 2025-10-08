@@ -13,6 +13,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
     href,
     target,
     rel,
+    download,
     type = 'button'
   }, ref) => {
     const baseClasses = 'inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200 focus-ring';
@@ -38,6 +39,7 @@ const Button = forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
           href={href}
           target={target}
           rel={rel}
+          download={download}
           className={classes}
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}

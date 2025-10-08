@@ -219,7 +219,8 @@ const Hero = () => {
               <Button
                 variant="secondary"
                 size="lg"
-                href="#" // Aquí pondrías el enlace a tu CV
+                href={`${BASE_URL}AlvaroMinarro-CV.pdf`}
+                download="AlvaroMinarro-CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group"
