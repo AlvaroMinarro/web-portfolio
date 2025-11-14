@@ -43,7 +43,7 @@ const Footer = () => {
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
             >
-              © {currentYear} Álvaro. {t.footer.rights}
+              © {currentYear} Álvaro Miñarro. {t.footer.rights}
             </motion.p>
           </div>
         </div>
