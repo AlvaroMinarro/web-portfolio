@@ -33,29 +33,29 @@ jobs:
         run: npm run build
  
       # 5. Sube los archivos compilados a Hostinger (¡CORREGIDO!)
-      - name: SFTP Deploy
+      - name: FTPS Deploy
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          # Usa los "Secretos" de FTP (no cambian)
+          # Usa los "Secretos" de FTP
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
  
           # --- ⬇️ AQUÍ ESTÁN LOS CAMBIOS IMPORTANTES ⬇️ ---
  
-          # 1. Especificar el protocolo SFTP
-          protocol: sftp
+          # 1. Usar el protocolo FTPS (como sugiere el error)
+          protocol: ftps
  
-          # 2. Especificar el puerto SFTP (el estándar es 22)
-          port: 22
+          # 2. Eliminar la línea del puerto (dejamos que la acción
+          #    use el puerto por defecto para FTPS, que suele ser 21 o 990)
  
-          # 3. Corregir el nombre del parámetro de limpieza
+          # 3. Mantener el nombre correcto para la limpieza
           dangerous-clean-slate: true
           
           # --- ⬆️ AQUÍ TERMINAN LOS CAMBIOS ⬆️ ---
  
-          # Carpeta que se va a subir (la 'dist' que creaste)
+          # Carpeta que se va a subir
           local-dir: ./dist/ 
  
-          # Carpeta de destino en Hostinger (la ruta exacta que encontramos)
+          # Carpeta de destino en Hostinger
           server-dir: /home/u511997431/domains/navajowhite-emu-898034.hostingersite.com/public_html/
