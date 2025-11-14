@@ -57,4 +57,4 @@ jobs:
  
           # Carpeta de destino en Hostinger
           # Usamos la ruta relativa que nos da la foto
-          server-dir: ./public_html/
+          server-dir: ./
