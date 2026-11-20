@@ -1,4 +1,4 @@
-import { Fragment, useRef, type CSSProperties } from 'react';
+import { Fragment, useLayoutEffect, useRef, useState, type CSSProperties } from 'react';
 import { splitStreamWords } from '@utils/streamText';
 
 type StreamTextProps = {
@@ -10,13 +10,19 @@ type StreamTextProps = {
 /**
  * Text that re-writes itself word by word, like a streamed answer, whenever
  * its value changes (language switches). The first render paints complete
- * text: streaming is a visual layer over the full DOM string, so readers,
+ * text and the change detection lives in a layout effect — never in render —
+ * so StrictMode's double render cannot swallow the streaming class. Readers,
  * crawlers and reduced-motion users get the content instantly.
  */
 const StreamText = ({ value, wordStaggerMs = 30 }: StreamTextProps) => {
-  const previous = useRef(value);
-  const isNewValue = previous.current !== value;
-  previous.current = value;
+  const previousRef = useRef(value);
+  const [streaming, setStreaming] = useState(false);
+
+  useLayoutEffect(() => {
+    if (previousRef.current === value) return;
+    previousRef.current = value;
+    setStreaming(true);
+  }, [value]);
 
   const words = splitStreamWords(value);
   const totalMs = words.length * wordStaggerMs + 250;
@@ -24,7 +30,7 @@ const StreamText = ({ value, wordStaggerMs = 30 }: StreamTextProps) => {
   return (
     <span
       key={value}
-      className={`stream-text${isNewValue ? ' is-streaming' : ''}`}
+      className={`stream-text${streaming ? ' is-streaming' : ''}`}
       style={{
         '--stream-word-stagger': `${wordStaggerMs}ms`,
         '--stream-total': `${totalMs}ms`,
@@ -38,7 +44,7 @@ const StreamText = ({ value, wordStaggerMs = 30 }: StreamTextProps) => {
           </span>
         </Fragment>
       ))}
-      {isNewValue && <span className="stream-caret" aria-hidden="true" />}
+      {streaming && <span className="stream-caret" aria-hidden="true" />}
     </span>
   );
 };
