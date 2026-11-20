@@ -25,26 +25,24 @@ const StreamText = ({ value, wordStaggerMs = 30 }: StreamTextProps) => {
   }, [value]);
 
   const words = splitStreamWords(value);
-  const totalMs = words.length * wordStaggerMs + 250;
 
   return (
     <span
       key={value}
       className={`stream-text${streaming ? ' is-streaming' : ''}`}
-      style={{
-        '--stream-word-stagger': `${wordStaggerMs}ms`,
-        '--stream-total': `${totalMs}ms`,
-      } as CSSProperties}
+      style={{ '--stream-word-stagger': `${wordStaggerMs}ms` } as CSSProperties}
     >
       {words.map((word, index) => (
         <Fragment key={`${index}-${word}`}>
           {index > 0 && ' '}
-          <span className="stream-word" style={{ '--stream-i': index } as CSSProperties}>
+          <span
+            className={`stream-word${index === words.length - 1 ? ' stream-word--last' : ''}`}
+            style={{ '--stream-i': index } as CSSProperties}
+          >
             {word}
           </span>
         </Fragment>
       ))}
-      {streaming && <span className="stream-caret" aria-hidden="true" />}
     </span>
   );
 };
