@@ -47,6 +47,25 @@ export const translations: Record<Language, TranslationContent> = {
       installs: 'instalaciones activas',
       snapshot: 'Cifras históricas recogidas en el CV; fecha de medición desconocida. No son analíticas en tiempo real.',
       snapshotDated: '* Cifras recogidas en el CV; datos de {date}. No son analíticas en tiempo real.',
+      showcase: {
+        label: 'La app, en vivo',
+        mosaic: {
+          label: '01 · Mosaico',
+          text: 'La jornada completa de un vistazo: todos los partidos del día, organizados por liga y estado.',
+        },
+        details: {
+          label: '02 · Partidos',
+          text: 'Cada partida bajo el microscopio, con el mismo código Compose Multiplatform corriendo en Android e iOS.',
+        },
+        stats: {
+          label: '03 · Estadísticas',
+          text: 'Con más pantalla, más juego: el layout adaptativo despliega las estadísticas del torneo en tablet.',
+        },
+        widget: {
+          label: '04 · Inicio',
+          text: 'Y cuando no abres la app, la app viene a ti: el widget vive en tu pantalla de inicio.',
+        },
+      },
       totalUserInstalls: 'instalaciones totales de usuarios',
       installsOnActiveDevices: 'instalaciones en dispositivos activos',
       sourceDate: 'Google Play · Fecha de los datos:',
@@ -213,6 +232,25 @@ export const translations: Record<Language, TranslationContent> = {
       installs: 'active installs',
       snapshot: 'Historical figures from the supplied CV; measurement date unknown. Not live analytics.',
       snapshotDated: '* Figures from the CV; data as of {date}. Not live analytics.',
+      showcase: {
+        label: 'The app, live',
+        mosaic: {
+          label: '01 · Mosaic',
+          text: 'The full matchday at a glance: every game of the day, organized by league and status.',
+        },
+        details: {
+          label: '02 · Matches',
+          text: 'Every match under the microscope, the same Compose Multiplatform code running on Android and iOS.',
+        },
+        stats: {
+          label: '03 · Statistics',
+          text: 'More screen, more game: the adaptive layout unfolds the tournament statistics on tablet.',
+        },
+        widget: {
+          label: '04 · Home',
+          text: 'And when you do not open the app, the app comes to you: the widget lives on your home screen.',
+        },
+      },
       totalUserInstalls: 'total user installs',
       installsOnActiveDevices: 'installs on active devices',
       sourceDate: 'Google Play · Source-data date:',

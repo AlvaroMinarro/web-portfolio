@@ -88,6 +88,13 @@ export interface TranslationContent {
     installs: string;
     snapshot: string;
     snapshotDated: string;
+    showcase: {
+      label: string;
+      mosaic: { label: string; text: string };
+      details: { label: string; text: string };
+      stats: { label: string; text: string };
+      widget: { label: string; text: string };
+    };
     totalUserInstalls: string;
     installsOnActiveDevices: string;
     sourceDate: string;

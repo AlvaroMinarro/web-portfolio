@@ -1,6 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@hooks/index';
-import { Section, RollingNumber } from '@components/ui';
+import { Section, RollingNumber, AppShowcase } from '@components/ui';
 import { flagshipProject, portfolioAssets } from '@/data/portfolio';
 import { formatProjectMetrics } from '@/data/projectMetrics';
 import { useProjectMetrics } from '@/hooks/useProjectMetrics';
@@ -43,6 +43,7 @@ const Projects = () => {
             ))}
           </ul>
 
+          <AppShowcase />
           <dl className="project-metrics">
             <div>
               <dt>{t.projects[metrics.primaryLabel]}</dt>
