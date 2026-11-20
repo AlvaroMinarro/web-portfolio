@@ -27,14 +27,24 @@ const Hero = () => {
               {t.hero.projectCta}
               <ArrowDownRight aria-hidden="true" size={18} />
             </Button>
-            <Button
-              variant="secondary"
-              href={portfolioAssets.cv}
-              download="AlvaroMinarro-CV.pdf"
-            >
-              {t.hero.downloadCV}
-              <Download aria-hidden="true" size={18} />
-            </Button>
+            <span className="cv-download-peek">
+              <img
+                src={portfolioAssets.androidPeek}
+                alt=""
+                aria-hidden="true"
+                width={512}
+                height={512}
+                decoding="async"
+              />
+              <Button
+                variant="secondary"
+                href={portfolioAssets.cv}
+                download="AlvaroMinarro-CV.pdf"
+              >
+                {t.hero.downloadCV}
+                <Download aria-hidden="true" size={18} />
+              </Button>
+            </span>
           </div>
         </div>
 

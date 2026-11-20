@@ -10,6 +10,7 @@ export const portfolioAssets = {
   navilens: `${BASE_URL}navilens.svg`,
   tracker: `${BASE_URL}lolesportstracker.png`,
   cv: `${BASE_URL}AlvaroMinarro-CV.pdf`,
+  androidPeek: `${BASE_URL}android-peek.svg`,
 };
 
 export const flagshipProject = {
