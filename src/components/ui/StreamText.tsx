@@ -14,7 +14,7 @@ type StreamTextProps = {
  * so StrictMode's double render cannot swallow the streaming class. Readers,
  * crawlers and reduced-motion users get the content instantly.
  */
-const StreamText = ({ value, wordStaggerMs = 30 }: StreamTextProps) => {
+const StreamText = ({ value, wordStaggerMs = 45 }: StreamTextProps) => {
   const previousRef = useRef(value);
   const [streaming, setStreaming] = useState(false);
 

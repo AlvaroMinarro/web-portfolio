@@ -343,23 +343,24 @@
     transform: translateX(-50%) translateY(-55%) rotate(-9deg);
   }
   /* Streamed text: words materialize word by word and the caret travels
-     with the writing, sitting after whichever word is arriving. */
-  .stream-word { display: inline-block; }
+     with the writing, sitting after whichever word is arriving. The caret is
+     absolutely positioned so it never occupies layout space between words. */
+  .stream-word { display: inline-block; position: relative; }
   .stream-text.is-streaming .stream-word {
     animation: stream-word-in 220ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
-    animation-delay: calc(var(--stream-i) * var(--stream-word-stagger, 30ms));
+    animation-delay: calc(var(--stream-i) * var(--stream-word-stagger, 45ms));
   }
   .stream-text.is-streaming .stream-word::after {
     content: '';
-    display: inline-block;
+    position: absolute;
+    left: calc(100% + 0.12em);
+    top: 0.12em;
     width: 0.55em;
     height: 1em;
-    margin-inline-start: 0.12em;
-    vertical-align: text-top;
     background: var(--color-accent);
     opacity: 0;
-    animation: stream-caret-hop var(--stream-word-stagger, 30ms) steps(1, end) forwards;
-    animation-delay: calc(var(--stream-i) * var(--stream-word-stagger, 30ms));
+    animation: stream-caret-hop var(--stream-word-stagger, 45ms) steps(1, end) forwards;
+    animation-delay: calc(var(--stream-i) * var(--stream-word-stagger, 45ms));
   }
   .stream-text.is-streaming .stream-word--last::after {
     animation-name: stream-caret-end;
