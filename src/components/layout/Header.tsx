@@ -114,7 +114,13 @@ const Header = () => {
                 aria-label={theme === 'dark' ? t.controls.lightTheme : t.controls.darkTheme}
                 title={theme === 'dark' ? t.controls.lightTheme : t.controls.darkTheme}
               >
-                {theme === 'dark' ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+                <span className="switch-plate" aria-hidden="true">
+                  <span
+                    className={`switch-rocker${theme === 'dark' ? ' switch-rocker--down' : ' switch-rocker--up'}`}
+                  >
+                    {theme === 'dark' ? <Moon size={13} /> : <Sun size={13} />}
+                  </span>
+                </span>
               </Button>
               <Button
                 ref={menuButtonRef}
