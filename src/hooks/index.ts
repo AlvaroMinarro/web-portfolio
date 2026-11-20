@@ -1,3 +1,4 @@
 export { useTheme } from './useTheme';
-export { useLanguage, LanguageProvider } from './useLanguage';
+export { useLanguage } from './useLanguage';
+export { LanguageProvider } from './LanguageProvider';
 export { useActiveSection } from './useActiveSection';

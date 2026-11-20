@@ -1,14 +1,7 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import type { Language, TranslationContent } from '@/types';
+import React, { useEffect, useMemo, useState } from 'react';
+import type { Language } from '@/types';
 import { translations } from '@i18n/translations';
-
-type LanguageContextValue = {
-  language: Language;
-  toggleLanguage: () => void;
-  t: TranslationContent;
-};
-
-const LanguageContext = createContext<LanguageContextValue | undefined>(undefined);
+import { LanguageContext, type LanguageContextValue } from './languageContext';
 
 const getInitialLanguage = (): Language => {
   const stored = localStorage.getItem('language') as Language | null;
@@ -40,13 +33,3 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     </LanguageContext.Provider>
   );
 };
-
-export const useLanguage = () => {
-  const ctx = useContext(LanguageContext);
-  if (!ctx) {
-    throw new Error('useLanguage must be used within a LanguageProvider');
-  }
-  return ctx;
-};
-
-
