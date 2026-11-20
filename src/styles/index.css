@@ -23,6 +23,8 @@
     --color-control-border: #627672;
     --color-hover-shadow: rgb(23 35 38 / 0.1);
     --color-portrait-echo: #D5BC7B;
+    --font-display: 'Space Grotesk', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
     --radius-control: 0.625rem;
     --radius-panel: 1rem;
     --header-height: 80px;
@@ -57,6 +59,7 @@
   }
   h1, h2, h3, h4 {
     color: var(--color-heading);
+    font-family: var(--font-display);
     font-weight: 600;
     line-height: 1.12;
     text-wrap: balance;
@@ -91,6 +94,7 @@
   .section-intro .technical-label, .contact-grid .technical-label { margin-bottom: 1.25rem; }
   .technical-label {
     color: var(--color-text-secondary);
+    font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 500;
     line-height: 1.6;
@@ -231,7 +235,7 @@
   .hero-role { color: var(--color-text-secondary); margin-bottom: 1rem; font-size: 1rem; }
   .hero-name {
     font-size: clamp(2.65rem, 6.8vw, 6rem);
-    font-weight: 750;
+    font-weight: 700;
     line-height: 1.04;
     letter-spacing: -0.065em;
   }

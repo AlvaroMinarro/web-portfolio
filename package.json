@@ -48,11 +48,11 @@
     "vite",
     "github-pages"
   ],
-  "author": "Álvaro",
+  "author": "Álvaro Miñarro Gil",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tu-usuario/web-portfolio.git"
+    "url": "https://github.com/AlvaroMinarro/web-portfolio.git"
   },
-  "homepage": "https://tu-usuario.github.io/web-portfolio/"
+  "homepage": "https://alvarominarro.github.io/web-portfolio/"
 }

@@ -1,0 +1,21 @@
+{
+  "name": "Álvaro Miñarro Gil — Portfolio",
+  "short_name": "Álvaro Dev",
+  "description": "Portfolio de Álvaro Miñarro Gil, desarrollador Android y Full Stack especializado en Kotlin, KMP, React, TypeScript e IoT",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F2F0EB",
+  "theme_color": "#459A88",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "android"],
+  "lang": "es",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "192x192 512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
