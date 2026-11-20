@@ -1,164 +1,141 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme, useLanguage, useActiveSection } from '@hooks/index';
 import { Button } from '@components/ui';
+import { sectionIds } from '@/types';
 import type { Section } from '@/types';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
+  const headerRef = useRef<HTMLElement>(null);
   const { theme, toggleTheme } = useTheme();
   const { language, toggleLanguage, t } = useLanguage();
   const { activeSection, scrollToSection } = useActiveSection();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+    if (!isMenuOpen) return;
+
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !headerRef.current?.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+    const desktop = window.matchMedia('(min-width: 1280px)');
+    const closeOnDesktop = () => {
+      if (desktop.matches) {
+        const focusWasInMenu = document.getElementById('mobile-navigation')?.contains(document.activeElement);
+        setIsMenuOpen(false);
+        if (focusWasInMenu || document.activeElement === menuButtonRef.current) {
+          headerRef.current?.querySelector<HTMLAnchorElement>('.header-identity')?.focus();
+        }
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    document.addEventListener('keydown', closeOnEscape);
+    document.addEventListener('pointerdown', closeOutside);
+    desktop.addEventListener('change', closeOnDesktop);
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.removeEventListener('pointerdown', closeOutside);
+      desktop.removeEventListener('change', closeOnDesktop);
+    };
+  }, [isMenuOpen]);
 
-  const navItems: { key: Section; label: string }[] = [
-    { key: 'home', label: t.nav.home },
-    { key: 'about', label: t.nav.about },
-    { key: 'technologies', label: t.nav.technologies },
-    { key: 'experience', label: t.nav.experience },
-    { key: 'contact', label: t.nav.contact },
-  ];
-
-  const handleNavClick = (section: Section) => {
-    scrollToSection(section);
+  const navigate = (section: Section) => {
     setIsMenuOpen(false);
+    scrollToSection(section);
+    window.history.pushState(null, '', `#${section}`);
+    document.getElementById(section)?.focus({ preventScroll: true });
   };
 
-  return (
-    <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-700'
-          : 'bg-transparent'
-      }`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
+  const navLinks = (className: string) => sectionIds.map(section => (
+    <a
+      key={section}
+      href={`#${section}`}
+      className={className}
+      aria-current={activeSection === section ? 'location' : undefined}
+      onClick={event => {
+        event.preventDefault();
+        navigate(section);
+      }}
     >
-      <nav className="section-container">
-        <div className="flex items-center justify-between h-16 lg:h-20">
-          {/* Logo */}
-          <motion.button
-            onClick={() => scrollToSection('home')}
-            className="text-lg lg:text-xl font-bold text-gradient focus-ring rounded-lg tracking-tight"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Álvaro Miñarro
-          </motion.button>
+      {t.nav[section]}
+    </a>
+  ));
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map(({ key, label }) => (
-              <button
-                key={key}
-                onClick={() => handleNavClick(key)}
-                className={`px-3 py-2 text-sm font-medium transition-colors duration-200 rounded-md focus-ring ${
-                  activeSection === key
-                    ? 'text-primary-600 dark:text-primary-400'
-                    : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400'
-                }`}
+  return (
+    <>
+      <a className="skip-link" href="#main-content">{t.controls.skip}</a>
+      <header className="portfolio-header" ref={headerRef}>
+        <nav className="section-container" aria-label={t.controls.navigation}>
+          <div className="header-row">
+            <a
+              href="#home"
+              className="header-identity"
+              onClick={event => {
+                event.preventDefault();
+                navigate('home');
+              }}
+            >
+              Álvaro Miñarro Gil<span className="name-period" aria-hidden="true">.</span>
+            </a>
+            <div className="desktop-navigation">{navLinks('nav-link')}</div>
+            <div className="header-controls">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="language-toggle"
+                onClick={toggleLanguage}
+                aria-label={t.controls.switchLanguage}
+                lang={language === 'es' ? 'en' : 'es'}
+                title={t.controls.switchLanguage}
               >
-                {label}
-              </button>
-            ))}
+                <Globe size={16} aria-hidden="true" />
+                <span>{language === 'es' ? 'EN' : 'ES'}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                className="theme-toggle"
+                onClick={event => {
+                  const bounds = event.currentTarget.getBoundingClientRect();
+                  toggleTheme({
+                    x: event.detail > 0 ? event.clientX : bounds.left + bounds.width / 2,
+                    y: event.detail > 0 ? event.clientY : bounds.top + bounds.height / 2,
+                  });
+                }}
+                aria-label={theme === 'dark' ? t.controls.lightTheme : t.controls.darkTheme}
+                title={theme === 'dark' ? t.controls.lightTheme : t.controls.darkTheme}
+              >
+                {theme === 'dark' ? <Sun size={20} aria-hidden="true" /> : <Moon size={20} aria-hidden="true" />}
+              </Button>
+              <Button
+                ref={menuButtonRef}
+                variant="ghost"
+                size="sm"
+                className="menu-toggle"
+                onClick={() => setIsMenuOpen(open => !open)}
+                aria-expanded={isMenuOpen}
+                aria-controls="mobile-navigation"
+                aria-label={isMenuOpen ? t.controls.closeMenu : t.controls.openMenu}
+              >
+                {isMenuOpen ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
+              </Button>
+            </div>
           </div>
-
-          {/* Controls */}
-          <div className="flex items-center space-x-2">
-            {/* Language Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleLanguage}
-              className="hidden sm:flex"
-              aria-label={`Switch to ${language === 'es' ? 'English' : 'Español'}`}
-            >
-              <Globe className="w-4 h-4 mr-2" />
-              {language === 'es' ? 'EN' : 'ES'}
-            </Button>
-
-            {/* Theme Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={toggleTheme}
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {theme === 'dark' ? (
-                <Sun className="w-4 h-4" />
-              ) : (
-                <Moon className="w-4 h-4" />
-              )}
-            </Button>
-
-            {/* Mobile Menu Toggle */}
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden"
-              aria-label="Toggle mobile menu"
-            >
-              {isMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
-            </Button>
+          <div id="mobile-navigation" className="mobile-navigation" hidden={!isMenuOpen}>
+            {navLinks('nav-link')}
           </div>
-        </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-lg"
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-            >
-              <div className="px-4 py-6 space-y-4">
-                {navItems.map(({ key, label }) => (
-                  <button
-                    key={key}
-                    onClick={() => handleNavClick(key)}
-                    className={`block w-full text-left px-4 py-3 text-base font-medium transition-colors duration-200 rounded-lg focus-ring ${
-                      activeSection === key
-                        ? 'text-primary-600 dark:text-primary-400 bg-primary-50 dark:bg-primary-900/20'
-                        : 'text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                    }`}
-                  >
-                    {label}
-                  </button>
-                ))}
-
-                {/* Mobile Language Toggle */}
-                <Button
-                  variant="ghost"
-                  onClick={toggleLanguage}
-                  className="w-full justify-start sm:hidden"
-                >
-                  <Globe className="w-4 h-4 mr-2" />
-                  {language === 'es' ? 'English' : 'Español'}
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
-    </motion.header>
+        </nav>
+      </header>
+    </>
   );
 };
 

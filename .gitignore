@@ -112,3 +112,8 @@ Desktop.ini
 
 # Linux
 *~
+# Local Pi runtime state
+.atl/
+
+# CodeGraph local index
+.codegraph/

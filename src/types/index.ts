@@ -1,154 +1,164 @@
-// Language types
-export type Language = 'es' | 'en';
+import type {
+  AnchorHTMLAttributes,
+  ButtonHTMLAttributes,
+  HTMLAttributes,
+  ReactNode,
+} from 'react';
 
-// Theme types
+export type Language = 'es' | 'en';
 export type Theme = 'light' | 'dark';
 
-// Navigation section types
-export type Section = 'home' | 'about' | 'technologies' | 'experience' | 'contact';
+export const sectionIds = [
+  'home',
+  'projects',
+  'about',
+  'experience',
+  'technologies',
+  'contact',
+] as const;
+export type Section = (typeof sectionIds)[number];
+export type ExperienceId = 'llamas' | 'navilens' | 'freelance' | 'tracker';
+export type CapabilityId = 'mobile' | 'web' | 'systems';
 
-// Technology interface
 export interface Technology {
-  name: string;
-  icon: string;
-  color: string;
-  category: 'mobile' | 'frontend' | 'backend' | 'database' | 'tools';
-  level?: 1 | 2 | 3; // 1: Estudiando, 2: Avanzado, 3: Expert
+  id: CapabilityId;
+  tools: string[];
+  evidenceSection: Section;
 }
 
-// Experience interface
 export interface Experience {
-  id: string;
+  id: ExperienceId;
   company: string;
-  position: string;
+  category: 'employment' | 'independent';
+  technologies: string[];
+  logo?: string;
+}
+
+export interface ExperienceContent {
+  role: string;
   period: string;
+  metadata: string;
   description: string;
-  technologies: string[];
-  location?: string;
-  type?: 'full-time' | 'part-time' | 'contract' | 'freelance';
-  achievements?: string[];
-  projectImage?: string;
+  details: string[];
 }
 
-// Project interface
-export interface Project {
-  id: string;
-  title: string;
-  description: string;
-  image?: string;
-  technologies: string[];
-  liveUrl?: string;
-  githubUrl?: string;
-  featured: boolean;
-}
-
-// Contact link interface
 export interface ContactLink {
+  id: 'email' | 'linkedin' | 'github';
   name: string;
   url: string;
-  icon: string;
-  color: string;
+  display: string;
 }
 
-// Translation content interface
 export interface TranslationContent {
-  nav: {
-    home: string;
-    about: string;
-    technologies: string;
-    experience: string;
-    contact: string;
+  nav: Record<Section, string>;
+  controls: {
+    navigation: string;
+    openMenu: string;
+    closeMenu: string;
+    switchLanguage: string;
+    lightTheme: string;
+    darkTheme: string;
+    skip: string;
+    backTop: string;
+    external: string;
   };
   hero: {
-    greeting: string;
+    label: string;
     name: string;
     role: string;
-    education: string;
+    specialty: string;
     description: string;
-    cta: string;
-    scroll: string;
+    projectCta: string;
     downloadCV: string;
-    status: string;
-    badges?: {
-      androidExpert: string;
-      kotlinCompose: string;
-      fullStack: string;
-    };
+    contactCta: string;
+    portraitAlt: string;
+    portraitCaption: string;
+    current: string;
+    currentRole: string;
+    location: string;
+  };
+  projects: {
+    label: string;
+    title: string;
+    category: string;
+    period: string;
+    description: string;
+    logoCaption: string;
+    downloads: string;
+    installs: string;
+    snapshot: string;
+    totalUserInstalls: string;
+    installsOnActiveDevices: string;
+    sourceDate: string;
+    reportingDelay: string;
+    architecture: string;
+    architectureDescription: string;
+    platforms: string;
+    platformDescription: string;
+    contactCta: string;
   };
   about: {
+    label: string;
     title: string;
-    subtitle: string;
     description: string[];
-    skills: string;
-    downloadCV: string;
-  };
-  technologies: {
-    title: string;
-    subtitle: string;
-    categories: {
-      mobile: string;
-      frontend: string;
-      backend: string;
-      database: string;
-      tools: string;
-    };
+    currentLabel: string;
+    currentRole: string;
+    currentPeriod: string;
+    currentDescription: string;
+    currentTools: string;
+    experienceCta: string;
   };
   experience: {
+    label: string;
     title: string;
-    subtitle: string;
-    present: string;
+    employment: string;
+    independent: string;
     viewMore: string;
     viewLess: string;
+    projectCta: string;
+    items: Record<ExperienceId, ExperienceContent>;
+    education: {
+      label: string;
+      title: string;
+      institution: string;
+      period: string;
+      specialty: string;
+      grade: string;
+    };
+  };
+  technologies: {
+    label: string;
+    title: string;
+    description: string;
+    groups: Record<CapabilityId, { title: string; description: string; evidence: string }>;
+    visualNote: string;
+    workflow: string;
   };
   contact: {
+    label: string;
     title: string;
-    subtitle: string;
-    ctaTitle: string;
-    ctaDescription: string;
-    form: {
-      name: string;
-      email: string;
-      message: string;
-      send: string;
-      sending: string;
-      success: string;
-      error: string;
-    };
-    links: {
-      email: string;
-      linkedin: string;
-      github: string;
-    };
+    description: string;
+    email: string;
+    cvLabel: string;
+    cvNote: string;
   };
   footer: {
-    madeWith: string;
-    and: string;
-    rights: string;
+    identity: string;
+    theme: string;
   };
 }
 
-// Animation variants type
-export interface AnimationVariants {
-  hidden: object;
-  visible: object;
+export interface SectionProps extends HTMLAttributes<HTMLElement> {
+  children: ReactNode;
 }
 
-// Component props types
-export interface SectionProps {
-  className?: string;
-  children: React.ReactNode;
-}
-
-export interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
+interface ButtonAppearance {
+  children: ReactNode;
   variant?: 'primary' | 'secondary' | 'ghost';
   size?: 'sm' | 'md' | 'lg';
-  disabled?: boolean;
-  className?: string;
-  href?: string;
-  target?: string;
-  rel?: string;
-  type?: 'button' | 'submit' | 'reset';
-  download?: string | boolean;
 }
+
+export type ButtonProps = ButtonAppearance & (
+  | (ButtonHTMLAttributes<HTMLButtonElement> & { href?: undefined })
+  | (AnchorHTMLAttributes<HTMLAnchorElement> & { href: string; disabled?: never })
+);
