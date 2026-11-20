@@ -98,7 +98,7 @@ const Header = () => {
                 title={t.controls.switchLanguage}
               >
                 <Globe size={16} aria-hidden="true" />
-                <StreamText value={language === 'es' ? 'EN' : 'ES'} />
+                <StreamText value={language === 'es' ? 'EN' : 'ES'} initialStream />
               </Button>
               <Button
                 variant="ghost"

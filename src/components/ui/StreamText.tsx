@@ -5,6 +5,8 @@ type StreamTextProps = {
   value: string;
   /** Per-word stagger in milliseconds while a new value streams in. */
   wordStaggerMs?: number;
+  /** Stream on first mount, not only when the value later changes. */
+  initialStream?: boolean;
 };
 
 /**
@@ -14,9 +16,9 @@ type StreamTextProps = {
  * so StrictMode's double render cannot swallow the streaming class. Readers,
  * crawlers and reduced-motion users get the content instantly.
  */
-const StreamText = ({ value, wordStaggerMs = 45 }: StreamTextProps) => {
+const StreamText = ({ value, wordStaggerMs = 45, initialStream = false }: StreamTextProps) => {
   const previousRef = useRef(value);
-  const [streaming, setStreaming] = useState(false);
+  const [streaming, setStreaming] = useState(initialStream);
 
   useLayoutEffect(() => {
     if (previousRef.current === value) return;

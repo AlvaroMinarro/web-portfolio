@@ -15,13 +15,13 @@ const Hero = () => {
 
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="hero-role"><StreamText value={t.hero.role} /></p>
+          <p className="hero-role"><StreamText value={t.hero.role} initialStream /></p>
           <h1 id="home-heading" className="hero-name" aria-label={`${t.hero.name} — ${t.hero.role}`}>
             <span>Álvaro</span>{' '}
             <span>Miñarro Gil<span className="name-period" aria-hidden="true">.</span></span>
           </h1>
-          <p className="hero-specialty"><StreamText value={t.hero.specialty} /></p>
-          <p className="hero-description"><StreamText value={t.hero.description} /></p>
+          <p className="hero-specialty"><StreamText value={t.hero.specialty} initialStream /></p>
+          <p className="hero-description"><StreamText value={t.hero.description} initialStream /></p>
           <div className="hero-actions">
             <Button href="#projects">
               {t.hero.projectCta}
