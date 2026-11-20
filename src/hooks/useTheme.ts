@@ -36,6 +36,8 @@ export const useTheme = () => {
     const root = document.documentElement;
     root.classList.remove('theme-reveal');
     root.style.removeProperty('--theme-reveal-color-scheme');
+    root.style.removeProperty('--theme-reveal-x');
+    root.style.removeProperty('--theme-reveal-y');
     try {
       previous?.animation?.cancel();
       previous?.transition.skipTransition();
@@ -108,6 +110,8 @@ export const useTheme = () => {
     try {
       // Native scrollbars are not clipped by the root snapshot's circular reveal.
       root.style.setProperty('--theme-reveal-color-scheme', getComputedStyle(root).colorScheme);
+      root.style.setProperty('--theme-reveal-x', `${x}px`);
+      root.style.setProperty('--theme-reveal-y', `${y}px`);
       root.classList.add('theme-reveal');
       const transition = transitionDocument.startViewTransition!(commit);
       const current: { transition: ThemeTransition; animation?: Animation } = { transition };
@@ -117,6 +121,8 @@ export const useTheme = () => {
         active.current = null;
         root.classList.remove('theme-reveal');
         root.style.removeProperty('--theme-reveal-color-scheme');
+        root.style.removeProperty('--theme-reveal-x');
+        root.style.removeProperty('--theme-reveal-y');
       };
       const fallback = () => {
         if (id !== requestId.current) return;
@@ -134,7 +140,7 @@ export const useTheme = () => {
         }
         current.animation = root.animate(
           { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
-          { duration: 750, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', pseudoElement: '::view-transition-new(root)' }
+          { duration: 750, easing: 'cubic-bezier(0.65, 0, 0.35, 1)', fill: 'forwards', pseudoElement: '::view-transition-new(root)' }
         );
         void current.animation.finished.catch(() => undefined);
       }).catch(fallback);

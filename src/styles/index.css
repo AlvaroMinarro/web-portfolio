@@ -495,7 +495,13 @@
   mix-blend-mode: normal;
 }
 :root.theme-reveal::view-transition-old(root) { z-index: 1; }
-:root.theme-reveal::view-transition-new(root) { z-index: 2; }
+/* Clamp the incoming snapshot to the trusted origin until the WAAPI reveal takes
+   over: engines that paint the pseudo-tree before the ready callback (observed
+   in Gecko) would otherwise flash the new theme for a frame or two. */
+:root.theme-reveal::view-transition-new(root) {
+  z-index: 2;
+  clip-path: circle(0px at var(--theme-reveal-x, 0px) var(--theme-reveal-y, 0px));
+}
 
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
