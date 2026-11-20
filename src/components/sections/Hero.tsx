@@ -1,6 +1,6 @@
 import { ArrowDownRight, ArrowUpRight, Download } from 'lucide-react';
 import { useLanguage } from '@hooks/index';
-import { Button, Section } from '@components/ui';
+import { Button, Section, StreamText } from '@components/ui';
 import { portfolioAssets } from '@/data/portfolio';
 
 const Hero = () => {
@@ -15,13 +15,13 @@ const Hero = () => {
 
       <div className="hero-grid">
         <div className="hero-copy">
-          <p className="hero-role">{t.hero.role}</p>
+          <p className="hero-role"><StreamText value={t.hero.role} /></p>
           <h1 id="home-heading" className="hero-name" aria-label={`${t.hero.name} — ${t.hero.role}`}>
             <span>Álvaro</span>{' '}
             <span>Miñarro Gil<span className="name-period" aria-hidden="true">.</span></span>
           </h1>
-          <p className="hero-specialty">{t.hero.specialty}</p>
-          <p className="hero-description">{t.hero.description}</p>
+          <p className="hero-specialty"><StreamText value={t.hero.specialty} /></p>
+          <p className="hero-description"><StreamText value={t.hero.description} /></p>
           <div className="hero-actions">
             <Button href="#projects">
               {t.hero.projectCta}

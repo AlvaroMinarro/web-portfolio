@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X, Sun, Moon, Globe } from 'lucide-react';
 import { useTheme, useLanguage, useActiveSection } from '@hooks/index';
-import { Button } from '@components/ui';
+import { Button, StreamText } from '@components/ui';
 import { sectionIds } from '@/types';
 import type { Section } from '@/types';
 
@@ -98,7 +98,7 @@ const Header = () => {
                 title={t.controls.switchLanguage}
               >
                 <Globe size={16} aria-hidden="true" />
-                <span>{language === 'es' ? 'EN' : 'ES'}</span>
+                <StreamText value={language === 'es' ? 'EN' : 'ES'} />
               </Button>
               <Button
                 variant="ghost"
