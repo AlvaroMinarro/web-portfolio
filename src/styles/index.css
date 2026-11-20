@@ -309,6 +309,18 @@
   .project-metrics dt { color: var(--color-text-secondary); font-size: 0.8125rem; }
   .project-metrics dd { order: -1; color: var(--color-heading); font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.2; letter-spacing: -0.06em; overflow-wrap: anywhere; }
   .evidence-note { margin-top: 0.75rem; color: var(--color-text-secondary); font-size: 0.75rem; }
+  /* Odometer counters: digit columns roll through their cards on first view.
+     The global reduced-motion rule flattens the transition to an instant figure. */
+  .rolling-number { display: inline-flex; }
+  .rolling-number-reel { display: inline-flex; align-items: baseline; line-height: 1; }
+  .rolling-number-static { line-height: 1; }
+  .rolling-digit { display: inline-block; height: 1em; overflow: hidden; }
+  .rolling-digit-strip { display: flex; flex-direction: column; transform: translateY(0); }
+  .rolling-digit-card { display: block; height: 1em; line-height: 1; text-align: center; }
+  .rolling-number.is-rolled .rolling-digit-strip {
+    transform: translateY(calc(var(--rolling-target, 0) * -10%));
+    transition: transform 900ms cubic-bezier(0.65, 0, 0.35, 1);
+  }
   .project-details { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1.75rem; margin-block: 2rem; padding-top: 2rem; border-top: 1px solid var(--color-rule); }
   .project-details p { margin-top: 0.75rem; font-size: 0.9375rem; }
 

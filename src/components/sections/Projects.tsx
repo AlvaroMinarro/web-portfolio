@@ -1,6 +1,6 @@
 import { ArrowUpRight } from 'lucide-react';
 import { useLanguage } from '@hooks/index';
-import { Section } from '@components/ui';
+import { Section, RollingNumber } from '@components/ui';
 import { flagshipProject, portfolioAssets } from '@/data/portfolio';
 import { formatProjectMetrics } from '@/data/projectMetrics';
 import { useProjectMetrics } from '@/hooks/useProjectMetrics';
@@ -46,11 +46,11 @@ const Projects = () => {
           <dl className="project-metrics">
             <div>
               <dt>{t.projects[metrics.primaryLabel]}</dt>
-              <dd>{metrics.primaryValue}</dd>
+              <dd><RollingNumber value={metrics.primaryValue} /></dd>
             </div>
             <div>
               <dt>{t.projects[metrics.secondaryLabel]}</dt>
-              <dd>{metrics.secondaryValue}</dd>
+              <dd><RollingNumber value={metrics.secondaryValue} /></dd>
             </div>
           </dl>
           <p className="evidence-note">
