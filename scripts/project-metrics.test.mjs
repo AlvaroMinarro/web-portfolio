@@ -25,6 +25,12 @@ const snapshot = {
   activeInstalls: 400,
   observedOn: null,
 };
+const datedSnapshot = {
+  organicDownloads: 2400,
+  organicDownloadsQualifier: '+',
+  activeInstalls: 800,
+  observedOn: '2024-01',
+};
 
 const withCounter = (key, value) => ({
   ...aggregate,
@@ -142,6 +148,44 @@ for (const [language, locale] of [['es', 'es-ES'], ['en', 'en-US']]) {
     assert.match(translations[language].projects.reportingDelay, /3[–-]7/);
   });
 }
+
+test('CV snapshot with a valid observation month localizes the month-year date and keeps the qualifier', () => {
+  for (const [language, locale, expectedDate] of [['es', 'es-ES', 'enero de 2024'], ['en', 'en-US', 'January 2024']]) {
+    const number = new Intl.NumberFormat(locale);
+    const view = formatProjectMetrics(null, datedSnapshot, language);
+    assert.equal(view.source, 'cv');
+    assert.equal(view.primaryValue, `${number.format(datedSnapshot.organicDownloads)}+`);
+    assert.equal(view.secondaryValue, number.format(datedSnapshot.activeInstalls));
+    assert.equal(view.observedOn, '2024-01');
+    assert.equal(view.observedDate, expectedDate, language);
+  }
+});
+
+test('CV snapshot without a date keeps the unknown-date disclaimer', () => {
+  for (const language of ['es', 'en']) {
+    const view = formatProjectMetrics(null, snapshot, language);
+    assert.equal(view.observedOn, null);
+    assert.equal(view.observedDate, null);
+    assert.match(translations[language].projects.snapshot, /desconocida|unknown/);
+  }
+});
+
+test('invalid or future CV observation months fall back to the unknown date', () => {
+  for (const observedOn of ['2024-04', '2024-13', '2024-1', '24-01', 'enero', 42]) {
+    const view = formatProjectMetrics(null, { ...datedSnapshot, observedOn }, 'es', now);
+    assert.equal(view.observedOn, null, `${observedOn}`);
+    assert.equal(view.observedDate, null, `${observedOn}`);
+  }
+});
+
+test('dated CV evidence note carries the asterisk and the date placeholder', () => {
+  for (const language of ['es', 'en']) {
+    const note = translations[language].projects.snapshotDated;
+    assert.equal(typeof note, 'string', `${language}: snapshotDated missing`);
+    assert.match(note, /^\*/);
+    assert.match(note, /\{date\}/);
+  }
+});
 
 test('zero measured counters remain measured rather than being treated as missing', () => {
   const candidate = { ...aggregate, metrics: { totalUserInstalls: 0, installsOnActiveDevices: 0 } };

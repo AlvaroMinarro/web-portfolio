@@ -60,6 +60,8 @@ const Projects = () => {
                 <time dateTime={metrics.observedOn}>{metrics.observedDate}</time>.{' '}
                 {t.projects.reportingDelay}
               </>
+            ) : metrics.observedDate ? (
+              t.projects.snapshotDated.replace('{date}', metrics.observedDate)
             ) : t.projects.snapshot}
           </p>
 

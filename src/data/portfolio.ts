@@ -15,12 +15,12 @@ export const portfolioAssets = {
 export const flagshipProject = {
   title: 'LoL Esports Tracker',
   technologies: ['Kotlin', 'Compose Multiplatform', 'Ktor', 'Firebase'],
-  // Historical CV evidence; these are not measured total-user or active-device counters.
+  // CV evidence observed by the author in November 2026; not measured Google Play counters.
   snapshot: {
-    organicDownloads: 1300,
+    organicDownloads: 2400,
     organicDownloadsQualifier: '+',
-    activeInstalls: 400,
-    observedOn: null,
+    activeInstalls: 800,
+    observedOn: '2026-11',
   } satisfies CvProjectMetrics,
 };
 

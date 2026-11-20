@@ -87,6 +87,7 @@ export interface TranslationContent {
     downloads: string;
     installs: string;
     snapshot: string;
+    snapshotDated: string;
     totalUserInstalls: string;
     installsOnActiveDevices: string;
     sourceDate: string;

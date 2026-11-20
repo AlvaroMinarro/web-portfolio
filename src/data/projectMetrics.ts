@@ -23,7 +23,8 @@ export interface CvProjectMetrics {
   organicDownloads: number;
   organicDownloadsQualifier: '+';
   activeInstalls: number;
-  observedOn: null;
+  /** CV evidence observation month (YYYY-MM); null keeps the unknown-date disclaimer. */
+  observedOn: string | null;
 }
 
 function hasExactKeys(value: unknown, keys: string[]): value is Record<string, unknown> {
@@ -38,6 +39,14 @@ function isObservationDate(value: unknown, now: Date): value is string {
   const day = new Date(`${value}T00:00:00Z`);
   if (!Number.isFinite(day.getTime()) || day.toISOString().slice(0, 10) !== value) return false;
   return value <= now.toISOString().slice(0, 10);
+}
+
+/** CV evidence is month-precision: never invent a day the author did not state. */
+function isObservationMonth(value: string, now: Date): boolean {
+  if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(value)) return false;
+  const day = new Date(`${value}-01T00:00:00Z`);
+  if (!Number.isFinite(day.getTime()) || day.toISOString().slice(0, 7) !== value) return false;
+  return value <= now.toISOString().slice(0, 7);
 }
 
 function isCounter(value: unknown): value is number {
@@ -87,6 +96,7 @@ export function formatProjectMetrics(
   measured: MeasuredProjectMetrics | null,
   snapshot: CvProjectMetrics,
   language: Language,
+  now = new Date(),
 ) {
   const locale = language === 'es' ? 'es-ES' : 'en-US';
   const number = new Intl.NumberFormat(locale);
@@ -103,13 +113,20 @@ export function formatProjectMetrics(
       }).format(new Date(`${measured.observedOn}T00:00:00Z`)),
     };
   }
+  const observedMonth = typeof snapshot.observedOn === 'string' && isObservationMonth(snapshot.observedOn, now)
+    ? snapshot.observedOn
+    : null;
   return {
     source: 'cv' as const,
     primaryLabel: 'downloads' as const,
     primaryValue: `${number.format(snapshot.organicDownloads)}${snapshot.organicDownloadsQualifier}`,
     secondaryLabel: 'installs' as const,
     secondaryValue: number.format(snapshot.activeInstalls),
-    observedOn: snapshot.observedOn,
-    observedDate: null,
+    observedOn: observedMonth,
+    observedDate: observedMonth
+      ? new Intl.DateTimeFormat(locale, {
+        year: 'numeric', month: 'long', timeZone: 'UTC',
+      }).format(new Date(`${observedMonth}-01T00:00:00Z`))
+      : null,
   };
 }
