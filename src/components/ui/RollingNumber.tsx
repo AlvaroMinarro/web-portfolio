@@ -15,7 +15,7 @@ const DIGITS = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
  * qualifiers stay static, the plain value remains the accessible text, and the
  * global reduced-motion rule turns the roll into an instant final figure.
  */
-const RollingNumber = ({ value, staggerMs = 90 }: RollingNumberProps) => {
+const RollingNumber = ({ value, staggerMs = 500 }: RollingNumberProps) => {
   const containerRef = useRef<HTMLSpanElement | null>(null);
   const [rolled, setRolled] = useState(false);
 
