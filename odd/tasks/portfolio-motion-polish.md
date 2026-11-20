@@ -7,7 +7,7 @@ Preserve dirty feat/solitude-pine-portfolio and verified metrics. One source wri
 
 ## Tasks
 - [x] T0: Mapping and scoped primary-source research complete.
-- [ ] T1 (blocked): Whole-page Firefox flash before circle remains uncorrected. Need actual browser/version/OS and isolated viewport recording or validated exact runner. Accepted mouse lockout(decision878) is separate; preserve scrollbar latch.
+- [x] T1: Whole-page Gecko/Zen flash before circle RESOLVED 2026-11-20, author-confirmed in Zen in both directions; see "## T1 resolution" below. Accepted mouse lockout(decision878) is separate; preserve scrollbar latch.
 - [ ] T3 (in_progress, functional checks settled; closure blocked): Six conceptual glyphs and ES/EN explanation/provenance implemented across five authorized files. Independent verifier muxqov98-1-w1z2 settled: fresh270/270 browser assertions, types/build/metrics16 pass,115 repository files/index/status unchanged. Overall verification partial: lint configuration blocked; optional pixel raster unavailable. Parent inspected fresh dark-mobile and light-desktop screenshots. Human visual/native approval pending; no source repair or commit authorized.
 - [ ] T2 (pending): Independent symbol/render/contrast checks, renewed human visual review, missing coverage and native bounded review. No commit authorized.
 
@@ -56,3 +56,20 @@ Final115repo files(including29dist and2task docs),index hash/status unchanged; .
 
 ## Next step
 Present fresh scoped visual evidence for human review; do not relaunch writer or repair unrelated lint without authorization. T3 remains unchecked because closure is partial; independent functional symbol checks are no longer pending. Native assessment previously unassessable(untracked declaration); independent verifier now settled. Native inspect previously blocked intended-untracked selection, no lineage/broad START; bounded native review remains pending and must not absorb unrelated dirty work. Old preview45273 is unavailable, not a current preview. ExactFirefox record/version, real200%zoom, physicaltouch, otherengines, forcedfontfallback, fullTab and human/native approval remain pending. No commits/publishing.
+
+## T1 resolution (2026-11-20)
+
+Author-confirmed fixed in Zen (Gecko/Linux): no flash before the circle in either
+direction. Root cause found by code analysis instead of a viewport recording: the
+incoming `::view-transition-new(root)` layer had no clip until `transition.ready`
+attached the WAAPI reveal, so engines that paint the pseudo-tree in that window
+(Gecko) flashed the new theme page-wide; Chromium defers that paint, which is why
+Chromium captures never reproduced it and the earlier corrected Zen PNG showed the
+target immediately while the clip grew. Fix in commit e9f523c: origin-anchored
+zero-radius CSS clamp (`--theme-reveal-x/y` set beside `--theme-reveal-color-scheme`)
+plus `fill: forwards` so the end radius holds until teardown; cleanup paths
+extended; 750ms cubic-bezier, trusted origin, reduced/API fallbacks and the
+scrollbar latch untouched. Regression guard: scripts/theme-reveal-guard.test.mjs
+(suite 136/136). Mouse lockout (decision878) remains accepted, not repaired.
+The lint gate blocked since October was also restored this session with explicit
+authorization (commit 8a7382c).
